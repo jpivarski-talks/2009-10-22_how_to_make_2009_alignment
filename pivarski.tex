@@ -1,0 +1,196 @@
+\documentclass[compress]{beamer}
+\usepackage{ifthen,verbatim}
+
+\newcommand{\isnote}{}
+\xdefinecolor{lightyellow}{rgb}{1.,1.,0.25}
+\xdefinecolor{darkblue}{rgb}{0.1,0.1,0.7}
+
+%% Uncomment this to get annotations
+%% \def\notes{\addtocounter{page}{-1}
+%%            \renewcommand{\isnote}{*}
+%% 	   \beamertemplateshadingbackground{lightyellow}{white}
+%%            \begin{frame}
+%%            \frametitle{Notes for the previous page (page \insertpagenumber)}
+%%            \itemize}
+%% \def\endnotes{\enditemize
+%% 	      \end{frame}
+%%               \beamertemplateshadingbackground{white}{white}
+%%               \renewcommand{\isnote}{}}
+
+%% Uncomment this to not get annotations
+\def\notes{\comment}
+\def\endnotes{\endcomment}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{headline}{\mbox{ } \hfill
+\begin{minipage}{5.5 cm}
+\vspace{-0.75 cm} \small
+\end{minipage} \hfill
+\begin{minipage}{4.5 cm}
+\vspace{-0.75 cm} \small
+\begin{flushright}
+\ifthenelse{\equal{\insertpagenumber}{1}}{}{Jim Pivarski \hspace{0.2 cm} \insertpagenumber\isnote/\pageref{numpages}}
+\end{flushright}
+\end{minipage}\mbox{\hspace{0.2 cm}}\includegraphics[height=1 cm]{../cmslogo} \hspace{0.1 cm} \includegraphics[height=1 cm]{../tamulogo} \hspace{0.01 cm} \vspace{-1.05 cm}}
+
+\begin{document}
+\begin{frame}
+\vfill
+\begin{center}
+\textcolor{darkblue}{\Large Proposed Method of Producing \\ \vspace{0.2 cm} a CRAFT-2009 Alignment}
+
+\vfill
+\begin{columns}
+\column{0.3\linewidth}
+\begin{center}
+\large
+\textcolor{darkblue}{Jim Pivarski}
+\end{center}
+\end{columns}
+
+\begin{columns}
+\column{0.3\linewidth}
+\begin{center}
+\scriptsize
+{\it Texas A\&M University}
+\end{center}
+\end{columns}
+
+\vfill
+23 October, 2009
+
+\end{center}
+\end{frame}
+
+%% \begin{notes}
+%% \item This is the annotated version of my talk.
+%% \item If you want the version that I am presenting, download the one
+%% labeled ``slides'' on Indico (or just ignore these yellow pages).
+%% \item The annotated version is provided for extra detail and a written
+%% record of comments that I intend to make orally.
+%% \item Yellow notes refer to the content on the {\it previous} page.
+%% \item All other slides are identical for the two versions.
+%% \end{notes}
+
+\small
+
+\begin{frame}
+\frametitle{DT alignment}
+
+\begin{itemize}
+\item Here's what I propose for combined DT and CSC alignments, with a
+discussion of which parameters are well-determined and which are
+poorly-determined with tracks.
+
+\item Proposed DT construction:
+\begin{enumerate}
+\item 2009 photogrammetry and internal layer alignments from Luca
+\item global adjustment of the whole barrel from tracks (in the transverse plane)
+\item track-based chamber alignments for accessible chambers, except $\phi_x$ corrections.
+\end{enumerate}
+
+\item Where each parameter comes from:
+\begin{itemize}
+\item all layers/superlayer within chambers: internal alignment
+\item all $\phi_x$: photogrammetry
+\item $y$, $z$, and $\phi_x$ of station 4 chambers: photogrammetry
+\item low-statistics chambers: relative positions from photogrammetry
+with an overall global correction from tracks (barrel adjustment)
+\item high-statistics chambers: tracks
+\end{itemize}
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{DT alignment (continued)}
+
+\begin{itemize}
+\item What track-based alignment determines well/poorly:
+\begin{itemize}
+\item well: relative displacements between tracker and DT layers (as
+rigid groups within chambers)
+\item well: local $x$, $\phi_y$, $\phi_z$, medium: $y$, $z$, poorly: $\phi_x$
+\item well: central chambers above and below tracker, poorly: horizontal
+chambers and chambers near the wheel $\pm$2, station 1 corner of the
+barrel
+\end{itemize}
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{CSC alignment}
+
+\begin{itemize}
+\item Proposed CSC construction:
+\begin{enumerate}
+\item 2007 photogrammetry-derived chambers relative to disks (Karoly)
+\item 2009 link-derived chambers relative to disks or rings (Celso)
+\item 2009 $\phi_x$ and $z$ from endcap hardware (Jim B.)
+\item global adjustment of whole rings from tracks (in the transverse plane)
+\item track-based chamber alignments ($x$, $\phi_y$, $\phi_z$) for the few chambers
+that have enough statistics.
+\end{enumerate}
+
+\item Where each parameter comes from:
+\begin{itemize}
+\item chamber positions: track-based unless not available due to
+statistics, otherwise link-derived (with global adjustment) unless not
+available, otherwise photogrammetry (with global adjustment)
+\item $z$ of disks, average $\phi_x$ of chambers: endcap hardware
+\end{itemize}
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{CSC alignment (continued)}
+
+\begin{itemize}
+\item What the track-based alignment determines well/poorly:
+\begin{itemize}
+\item well: relative displacements between tracker and CSC layers (as
+rigid groups within rings)
+\item well: local $x$, $\phi_y$, $\phi_z$, poorly: $y$, $z$, $\phi_x$
+\item well: chambers on the top and bottom of rings, especially
+large-radius rings like ring-2 and ME1/3.
+\end{itemize}
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Last steps}
+
+\begin{itemize}
+\item Changes with respect to the presented alignment:
+\begin{itemize}
+\item full 1st reprocessing dataset: the one I used for the study already
+shown was a test-sample of the reprocessing--- that's why the statistics
+was a factor of 10 lower than the full sample.
+\item any tracker geometry updates (I'm pretty sure an update is planned)
+\item new input from endcap hardware and link
+\end{itemize}
+
+\item Update: data sample is now available; waiting on the other items
+
+\item Tuesday's AlCa meeting:
+\begin{itemize}
+\item conflicts with CSC-DPG; I will be busy presenting an endcap update there.
+\item will someone else be available to present at AlCa?
+\item and ask about status of tracker alignment?
+\end{itemize}
+\end{itemize}
+
+\label{numpages}
+\end{frame}
+
+%% \section*{First section}
+%% \begin{frame}
+%% \begin{center}
+%% \Huge \textcolor{blue}{First section}
+%% \end{center}
+%% \end{frame}
+
+\end{document}
